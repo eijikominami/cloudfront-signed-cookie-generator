@@ -1,0 +1,37 @@
+{
+    "paths": [
+        {
+            "name": "/cookie",
+            "lambdaFunction": "getcookie",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET"
+                ]
+            }
+        }
+    ],
+    "resourceName": "getcookie",
+    "apiName": "getcookie",
+    "functionArns": [
+        {
+            "lambdaFunction": "getcookie"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-singedcookie-prod-181132-authRole",
+        "unAuthRoleName": "amplify-singedcookie-prod-181132-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "getcookie",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
