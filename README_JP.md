@@ -1,6 +1,8 @@
 [**English**](README.md) / 日本語
 
 # cloudfront-signed-cookie-generator
+![GitHub](https://img.shields.io/github/license/eijikominami/cloudfront-signed-cookie-generator)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/eijikominami/cloudfront-signed-cookie-generator) 
 
 ``cloudfront-signed-cookie-generator`` は、Amazon CloudFront 上のWEBサイトへアクセスするための署名付きCookieを生成する、AWS Amplify アプリケーションです。このアプリケーションは、Vue.js で記述されており、Amazon API Gateway, Amazon Cognito, AWS Lambda and AWS Secret Manager および Amplify CLI が使用されています。
 
@@ -20,6 +22,8 @@ $ amplify status
 | Secret   | signedcookie          | No Change | awscloudformation |
 ```
 
+``Secret`` カテゴリは、 このアプリケーション独自のカスタムリソースです。
+
 ## AWS Amplify Console を用いたデプロイ
 
 AWS Amplify Console は、フルスタックサーバレスアプリケーションをホスティングします。AWSアカウントにサインインした上で下のボタンをクリックし、このアプリケーションをデプロイしてください。
@@ -34,7 +38,7 @@ AWS Amplify Console は、このリポジトリをあなたの GitHub アカウ�
 
 ### CloudFront キーペアの作成
 
-CloudFront 署名付きCookieを利用するためには、CloudFront キーペアが必要です。 [キーペアを生成](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs) して、AWS Security Manager に秘密鍵を保存してください。s
+CloudFront 署名付きCookieを利用するためには、CloudFront キーペアが必要です。 [キーペアを生成](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs) して、AWS Security Manager に秘密鍵を保存してください。
 
 ### カスタムポリシーの設定
 
