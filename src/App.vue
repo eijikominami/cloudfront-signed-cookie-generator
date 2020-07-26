@@ -6,7 +6,7 @@
         <img src="@/assets/Amplify-Logo-White.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         Signed Cookie Generator
       </a>
-      <amplify-sign-out button-text="Sing Out" v-if="signInStatus === 'signedIn'"></amplify-sign-out>
+      <amplify-sign-out button-text="Sign Out" v-if="signInStatus === 'signedIn'"></amplify-sign-out>
     </nav>
     <div class="contents" v-if="signInStatus === 'signedIn'">
       <h1 class="display-4">{{ h1 }}</h1>
