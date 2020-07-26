@@ -3,5 +3,5 @@
     "Domain": "example.com",
     "Duration": 3600,
     "IpAddress": "0.0.0.0/0",
-    "ResourcePath": "http://example.com/*"
+    "ResourcePath": "https://example.com/*"
 }

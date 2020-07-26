@@ -4,7 +4,9 @@
 ![GitHub](https://img.shields.io/github/license/eijikominami/cloudfront-signed-cookie-generator)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/eijikominami/cloudfront-signed-cookie-generator) 
 
-``cloudfront-signed-cookie-generator`` は、Amazon CloudFront 上のWEBサイトへアクセスするための署名付きCookieを生成する、AWS Amplify アプリケーションです。このアプリケーションは、Vue.js で記述されており、Amazon API Gateway, Amazon Cognito, AWS Lambda and AWS Secret Manager および Amplify CLI が使用されています。
+``cloudfront-signed-cookie-generator`` は、Amazon CloudFront 上のWEBサイトへアクセスするための署名付きCookieを生成する、AWS Amplify アプリケーションです。このアプリケーションは、Vue.js で記述されており、Amazon API Gateway, Amazon Cognito, AWS Lambda, AWS Secret Manager および Amplify CLI が使用されています。
+
+![screenshot](public/screenshot.gif)
 
 ## アーキテクチャ
 
@@ -28,7 +30,7 @@ $ amplify status
 
 AWS Amplify Console は、フルスタックサーバレスアプリケーションをホスティングします。AWSアカウントにサインインした上で下のボタンをクリックし、このアプリケーションをデプロイしてください。
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/eijikominami/cloudfront-signed-cookie-generator-generator)
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://ap-northeast-1.console.aws.amazon.com/amplify/home?region=ap-northeast-1#/deploy?repo=https://github.com/eijikominami/cloudfront-signed-cookie-generator)
 
 AWS Amplify Console は、このリポジトリをあなたの GitHub アカウント上にフォークします。その後、バックエンドとフロントエンドのビルドとデプロイを実行します。生成されたアプリケーションは、 ``https://master.appid.amplifyapp.com`` で利用可能となります。
 
@@ -50,7 +52,7 @@ CloudFront 署名付きCookieを利用するためには、CloudFront キーペ�
     "Domain": "example.com",
     "Duration": 3600,
     "IpAddress": "0.0.0.0/0",
-    "ResourcePath": "http://example.com/*"
+    "ResourcePath": "https://example.com/*"
 }
 ```
 
