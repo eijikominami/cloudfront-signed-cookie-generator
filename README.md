@@ -1,6 +1,8 @@
 English / [**日本語**](README_JP.md)
 
 # cloudfront-signed-cookie-generator
+![GitHub](https://img.shields.io/github/license/eijikominami/cloudfront-signed-cookie-generator)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/eijikominami/cloudfront-signed-cookie-generator) 
 
 ``cloudfront-signed-cookie-generator`` is an AWS Amplify application that generates signed cookies to access websites on Amazon CloudFront. The application is written in Vue.js and uses Amazon API Gateway, Amazon Cognito, AWS Lambda and AWS Secret Manager as well as the Amplify CLI.
 
@@ -19,6 +21,8 @@ $ amplify status
 | Api      | getcookie             | No Change | awscloudformation |
 | Secret   | signedcookie          | No Change | awscloudformation |
 ```
+
+The `` Secret`` category is a custom resource unique to this application.
 
 ## Deploy with the AWS Amplify Console
 
