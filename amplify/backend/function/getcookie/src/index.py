@@ -19,7 +19,7 @@ def handler(event, context):
     expiration = int(time.time()) + int(os.environ['DURATION'])
     private_key = get_secret()
     # Policy statement
-    statement = '{"Statement":[{"Resource":"' + os.environ['RESOURCE_PATH'] + '","Condition":{"AWS:SourceIp": "'+ os.environ['DURATION'] + '"},"DateLessThan":{"AWS:EpochTime":' + str(expiration) + '}}}]}'
+    statement = '{"Statement":[{"Resource":"' + os.environ['RESOURCE_PATH'] + '","Condition":{"IpAddress":{"AWS:SourceIp": "'+ os.environ['IP_ADDRESS'] + '"},"DateLessThan":{"AWS:EpochTime":' + str(expiration) + '}}}]}'
     # Encode base64 encode and replace invalid characters
     encoded_statement = base64.b64encode(statement.encode('utf-8')).decode().translate(str.maketrans({'+': '-', '=': '_', '/': '~'}))
     # Hash object
@@ -62,7 +62,7 @@ def rsa_signer(message, key):
 
 def get_secret():
 
-    secret_name = "prod/cloudfront"
+    secret_name = os.environ['ENV'] + "/cloudfront"
 
     # Create a Secrets Manager client
     session = boto3.session.Session()

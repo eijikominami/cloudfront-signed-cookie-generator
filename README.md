@@ -42,11 +42,21 @@ After deploying, configure your application.
 
 Each of the AWS accounts that you use to create CloudFront signed cookies must have its own CloudFront key pair, and the key pair must be active. [Create a key pair](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs) and store the private key in AWS Security Manager.
 
+### Update a Email Domain Filtering
+
+This application contains a function that is run by pre sign-up Lambda triggers from Cognito, which only allows whitelisted emails. The list has the ``@gmail.com`` domain by default. Please update ``/amplify/backend/function/signedcookiePreSignup/function-parameter.json`` if you change.
+
+```
+{
+ "DOMAINWHITELIST": "gmail.com"
+}
+```
+
 ### Configure a Custom Policy 
 
 This application creates signed cookies using a [custom policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html). The custom policy is a policy statement in JSON format that specifies the restrictions on the signed cookie. Update the ``amplify/backend/function/getcookie/parameters.json`` to suit your environment.
 
-```json:amplify/backend/function/getcookie/parameters.json
+```json
 {
     "AccessKey": "XXXXXXXXXXXXXXXX",
     "Domain": "example.com",

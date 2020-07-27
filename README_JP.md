@@ -42,6 +42,16 @@ AWS Amplify Console は、このリポジトリをあなたの GitHub アカウ�
 
 CloudFront 署名付きCookieを利用するためには、CloudFront キーペアが必要です。 [キーペアを生成](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs) して、AWS Security Manager に秘密鍵を保存してください。
 
+### メールのドメインリストの更新
+
+このアプリケーションには、Cognito のサインアップ前 Lambda トリガーによって実行される関数があります。この関数は、ホワイトリストに掲載されたEメールのみ登録を許可し、初期時には ``@gmail.com`` ドメインのみ登録されています。このリストを変更される場合は、 ``/amplify/backend/function/signedcookiePreSignup/function-parameter.json`` を更新してください。
+
+```
+{
+ "DOMAINWHITELIST": "gmail.com"
+}
+```
+
 ### カスタムポリシーの設定
 
 このアプリケーションは、[カスタムポリシー](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html)を用いた署名付きCookieを生成します。カスタムポリシーは、JSON形式で、署名付きCookieの認証条件を明記しています。自身の環境に合わせて ``amplify/backend/function/getcookie/parameters.json`` を更新してください。
