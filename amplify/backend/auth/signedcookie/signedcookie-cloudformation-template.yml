@@ -265,7 +265,7 @@ Resources:
   # BEGIN USER POOL LAMBDA RESOURCES
   UserPoolClientRole:
   # Created to execute Lambda which gets userpool app client config values
-    Type: 'AWS::IAM::Role'
+    Type: AWS::IAM::Role
     Properties:
       RoleName: !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',['upClientLambdaRole', 'undefined', !Select [3, !Split ['-', !Ref 'AWS::StackName']], '-', !Ref env]]]
       AssumeRolePolicyDocument:
@@ -282,7 +282,7 @@ Resources:
   # Lambda which gets userpool app client config values
   # Depends on UserPool for id
   # Depends on UserPoolClientRole for role ARN
-    Type: 'AWS::Lambda::Function'
+    Type: AWS::Lambda::Function
     Properties:
       Code:
         ZipFile: !Join 
@@ -319,7 +319,7 @@ Resources:
   # Sets userpool policy for the role that executes the Userpool Client Lambda
   # Depends on UserPool for Arn
   # Marked as depending on UserPoolClientRole for easier to understand CFN sequencing
-    Type: 'AWS::IAM::Policy'
+    Type: AWS::IAM::Policy
     Properties:
       PolicyName: signedcd206f18_userpoolclient_lambda_iam_policy
       Roles: 
@@ -336,7 +336,7 @@ Resources:
   # Sets log policy for the role that executes the Userpool Client Lambda
   # Depends on UserPool for Arn
   # Marked as depending on UserPoolClientLambdaPolicy for easier to understand CFN sequencing
-    Type: 'AWS::IAM::Policy'
+    Type: AWS::IAM::Policy
     Properties:
       PolicyName: signedcd206f18_userpoolclient_lambda_log_policy
       Roles: 
@@ -358,7 +358,7 @@ Resources:
   # Depends on UserPool for Id
   # Depends on UserPoolClient for Id
   # Marked as depending on UserPoolClientLambdaPolicy for easier to understand CFN sequencing
-    Type: 'Custom::LambdaCallout'
+    Type: Custom::LambdaCallout
     Properties:
       ServiceToken: !GetAtt UserPoolClientLambda.Arn
       clientId: !Ref UserPoolClient
