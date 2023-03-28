@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "paths": {
+    "/cookie": {
+      "name": "/cookie",
+      "lambdaFunction": "getcookie",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
+    }
+  }
+}

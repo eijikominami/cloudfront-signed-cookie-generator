@@ -6,9 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-cryptography = "*"
-boto3 = "*"
-botocore = "*"
+src = {editable = true, path = "./src"}
 
 [requires]
 python_version = "3.8"

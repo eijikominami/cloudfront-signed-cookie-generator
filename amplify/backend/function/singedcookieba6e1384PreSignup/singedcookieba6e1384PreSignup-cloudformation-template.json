@@ -2,33 +2,50 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"11.0.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
-    "CloudWatchRule": {
+    "DOMAINBLACKLIST": {
       "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Default": ""
     },
-    "deploymentBucketName": {
-      "Type": "String"
+    "DOMAINALLOWLIST": {
+      "Type": "String",
+      "Default": ""
+    },
+    "modules": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Comma-delimited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+    },
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
     },
     "env": {
       "Type": "String"
     },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
     "s3Key": {
-      "Type": "String"
-    },
-    "AccessKey": {
-      "Type": "String"
-    },
-    "Domain": {
-      "Type": "String"
-    },
-    "Duration": {
-      "Type": "Number"
-    },
-    "IpAddress": {
-      "Type": "String"
-    },
-    "ResourcePath": {
       "Type": "String"
     }
   },
@@ -50,24 +67,16 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "getcookie",
+            "singedcookieba6e1384PreSignup",
             {
               "Fn::Join": [
                 "",
                 [
-                  "getcookie",
+                  "singedcookieba6e1384PreSignup",
                   "-",
                   {
                     "Ref": "env"
@@ -82,23 +91,17 @@
             "ENV": {
               "Ref": "env"
             },
+            "MODULES": {
+              "Ref": "modules"
+            },
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "ACCESS_KEY": {
-              "Ref": "AccessKey"
+            "DOMAINALLOWLIST": {
+              "Ref": "DOMAINALLOWLIST"
             },
-            "DOMAIN": {
-              "Ref": "Domain"
-            },
-            "DURATION": {
-              "Ref": "Duration"
-            },
-            "IP_ADDRESS": {
-              "Ref": "IpAddress"
-            },
-            "RESOURCE_PATH": {
-              "Ref": "ResourcePath"
+            "DOMAINBLACKLIST": {
+              "Ref": "DOMAINBLACKLIST"
             }
           }
         },
@@ -108,9 +111,16 @@
             "Arn"
           ]
         },
-        "Runtime": "python3.8",
-        "Layers": [],
-        "Timeout": 25
+        "Runtime": "nodejs16.x",
+        "Timeout": 25,
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        }
       }
     },
     "LambdaExecutionRole": {
@@ -119,12 +129,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "singedcookieLambdaRole83395ee7",
+            "singedcookieba6e1384PreSignup",
             {
               "Fn::Join": [
                 "",
                 [
-                  "singedcookieLambdaRole83395ee7",
+                  "singedcookieba6e1384PreSignup",
                   "-",
                   {
                     "Ref": "env"
@@ -210,11 +220,6 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
@@ -226,6 +231,11 @@
           "LambdaExecutionRole",
           "Arn"
         ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }
