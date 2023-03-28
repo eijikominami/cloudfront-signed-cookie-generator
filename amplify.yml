@@ -15,6 +15,18 @@ backend:
         - cd $BASE_PATH
     build:
       commands:
+        - |
+          if [ -n $ACCESS_KEY ] && [ -n $DOMAIN ] && [ -n $DURATION ] && [ -n $IP_ADDRESS ] && [ -n $RESOURCE_PATH ]; then
+            echo "# Updating amplify/backend/function/getcookie/paramters.json"
+            echo "{\"AccessKey\":\"$ACCESS_KEY\",\"Domain\":\"$DOMAIN\",\"Duration\":$DURATION,\"IpAddress\":\"$IP_ADDRESS\",\"ResourcePath\":\"$RESOURCE_PATH\"}" > amplify/backend/function/getcookie/parameters.json
+          fi
+        - cat amplify/backend/function/getcookie/parameters.json
+        - |
+          if [ -n $DOMAINALLOWLIST ]; then
+            echo "# Updating amplify/backend/function/singedcookieba6e1384PreSignup/parameters.json "
+            echo "{\"modules\":\"email-filter-allowlist\",\"resourceName\":\"singedcookieba6e1384PreSignup\",\"DOMAINALLOWLIST\":\"$DOMAINALLOWLIST\"}" > amplify/backend/function/singedcookieba6e1384PreSignup/parameters.json
+          fi
+        - cat amplify/backend/function/singedcookieba6e1384PreSignup/parameters.json 
         - '# Execute Amplify CLI with the helper script'
         - amplifyPush --simple
 frontend:

@@ -30,6 +30,10 @@
     },
     "ResourcePath": {
       "Type": "String"
+    },
+    "functionsingedcookiecryptographyArn": {
+      "Type": "String",
+      "Default": "functionsingedcookiecryptographyArn"
     }
   },
   "Conditions": {
@@ -109,7 +113,11 @@
           ]
         },
         "Runtime": "python3.8",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionsingedcookiecryptographyArn"
+          }
+        ],
         "Timeout": 25
       }
     },
@@ -186,6 +194,25 @@
                     },
                     "lambda": {
                       "Ref": "LambdaFunction"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "secretsmanager:GetSecretValue"
+              ],
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:secretsmanager:${region}:${account}:secret:*",
+                  {
+                    "region": {
+                      "Ref": "AWS::Region"
+                    },
+                    "account": {
+                      "Ref": "AWS::AccountId"
                     }
                   }
                 ]

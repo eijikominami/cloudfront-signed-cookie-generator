@@ -54,7 +54,17 @@ CloudFront 署名付きCookieを利用するためには、CloudFront キーペ�
 
 ### カスタムポリシーの設定
 
-このアプリケーションは、[カスタムポリシー](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html)を用いた署名付きCookieを生成します。カスタムポリシーは、JSON形式で、署名付きCookieの認証条件を明記しています。自身の環境に合わせて ``amplify/backend/function/getcookie/parameters.json`` を更新してください。
+このアプリケーションは、[カスタムポリシー](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html)を用いた署名付きCookieを生成します。カスタムポリシーは、JSON形式で、署名付きCookieの認証条件を明記しています。自身の環境に合わせて ``amplify/backend/function/getcookie/parameters.json`` もしくは [AWS Amplify の ``環境変数``](https://docs.aws.amazon.com/ja_jp/amplify/latest/userguide/environment-variables.html) を更新してください。
+
+以下のパラメータを指定することができます。
+
+| parameters.json | 環境変数 | タイプ | 詳細 |
+| --- | --- | --- | --- |
+| AccessKey | ACCESS_KEY | String | キーペアID |
+| Domain | DOMAIN | String | リクエストするファイルのドメイン名 |
+| Duration | DURATION | String | リクエスト時刻を起点とした署名付きCookieの有効期限 |
+| IpAddress | IP_ADDRESS | String | 許可するIPアドレス  |
+| ResourcePath | RESOURCE_PATH | String | 許可するリクエストパス |
 
 ```json:amplify/backend/function/getcookie/parameters.json
 {
@@ -65,13 +75,3 @@ CloudFront 署名付きCookieを利用するためには、CloudFront キーペ�
     "ResourcePath": "https://example.com/*"
 }
 ```
-
-以下のパラメータを指定することができます。
-
-| 名前 | タイプ | 詳細 |
-| --- | --- | --- |
-| AccessKey | String | キーペアID |
-| Domain | String | リクエストするファイルのドメイン名 |
-| Duration | String | リクエスト時刻を起点とした署名付きCookieの有効期限 |
-| IpAddress | String | 許可するIPアドレス  |
-| ResourcePath | String | 許可するリクエストパス |

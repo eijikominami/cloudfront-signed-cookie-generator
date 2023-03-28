@@ -54,7 +54,17 @@ This application contains a function that is run by pre sign-up Lambda triggers 
 
 ### Configure a Custom Policy 
 
-This application creates signed cookies using a [custom policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html). The custom policy is a policy statement in JSON format that specifies the restrictions on the signed cookie. Update the ``amplify/backend/function/getcookie/parameters.json`` to suit your environment.
+This application creates signed cookies using a [custom policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-setting-signed-cookie-custom-policy.html). The custom policy is a policy statement in JSON format that specifies the restrictions on the signed cookie. Update the ``amplify/backend/function/getcookie/parameters.json`` or [``Environment variables`` in AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html) to suit your environment.
+
+You can provide optional parameters as follows:
+
+| parameters.json | Environment variables | Type | Details | 
+| --- | --- | --- | --- |
+| AccessKey | ACCESS_KEY | String | The key pair ID for your key pair. |
+| Domain | DOMAIN | String | The domain name for the requested file. |
+| Duration | DURATION | String | The validity period from request time. |
+| IpAddress | IP_ADDRESS | String | The IP address of the client making the GET request.  |
+| ResourcePath | RESOURCE_PATH | String | The base URL including your query strings. |
 
 ```json
 {
@@ -65,13 +75,3 @@ This application creates signed cookies using a [custom policy](https://docs.aws
     "ResourcePath": "https://example.com/*"
 }
 ```
-
-You can provide optional parameters as follows:
-
-| Name | Type | Details | 
-| --- | --- | --- |
-| AccessKey | String | The key pair ID for your key pair. |
-| Domain | String | The domain name for the requested file. |
-| Duration | String | The validity period from request time. |
-| IpAddress | String | The IP address of the client making the GET request.  |
-| ResourcePath | String | The base URL including your query strings. |
