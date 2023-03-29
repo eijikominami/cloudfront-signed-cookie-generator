@@ -23,7 +23,7 @@ def handler(event, context):
     # Encode base64 encode and replace invalid characters
     encoded_statement = base64.b64encode(statement.encode('utf-8')).decode().translate(str.maketrans({'+': '-', '=': '_', '/': '~'}))
     # Hash object
-    encoded_signature = base64.b64encode(rsa_signer(statement.encode("utf-8"), private_key.encode("utf-8"))).decode().translate(str.maketrans({'+': '-', '=': '_', '/': '~'}))
+    encoded_signature = base64.b64encode(rsa_signer(statement.encode("utf-8"), private_key)).decode().translate(str.maketrans({'+': '-', '=': '_', '/': '~'}))
   except Exception as e:
     print(str(e))
     return {
@@ -56,7 +56,7 @@ def rsa_signer(message, key):
       backend=default_backend()
   )
   # Return an AsymmetricSignatureContext used for signing data.
-  signer = private_key.signer(padding.PKCS1v15(), hashes.SHA1())
+  signer = private_key.sign(padding.PKCS1v15(), hashes.SHA1())
   signer.update(message)
   return signer.finalize()
 
@@ -79,9 +79,4 @@ def get_secret():
     except ClientError as e:
         raise e
     else:
-        # String
-        if 'SecretString' in get_secret_value_response:
-            return get_secret_value_response['SecretString']
-        # Binary
-        else:
-            return base64.b64decode(get_secret_value_response['SecretBinary'])
+        return get_secret_value_response['SecretBinary']
