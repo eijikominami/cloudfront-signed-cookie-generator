@@ -56,9 +56,7 @@ def rsa_signer(message, key):
       backend=default_backend()
   )
   # Return an AsymmetricSignatureContext used for signing data.
-  signer = private_key.sign(padding.PKCS1v15(), hashes.SHA1())
-  signer.update(message)
-  return signer.finalize()
+  return private_key.sign(message, padding.PKCS1v15(), hashes.SHA1())
 
 def get_secret():
 
